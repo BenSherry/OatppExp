@@ -46,7 +46,7 @@ ENDPOINT("GET", "/users/{my-path-variable}", getUserById,
          PATH(Int64, userId, "my-path-variable")) 
 {
     OATPP_LOGD("Test", "userId=%d", userId->getValue());
-    return createResponse(Status::CODE_200, 87);
+    return createResponse(Status::CODE_200, "87");
     // curl http://localhost:8000/users/7
 }
 
