@@ -34,24 +34,28 @@ public:
  */
 #include OATPP_CODEGEN_BEGIN(ApiController)
   
-  ENDPOINT("GET", "/", root) {
+ENDPOINT("GET", "/", root)
+{
     auto dto = MyDto::createShared();
     dto->statusCode = 200;
     dto->message = "Hello World!";
     return createDtoResponse(Status::CODE_200, dto);
-   }
-    ENDPOINT("GET", "/users/{my-path-variable}", getUserById,
+    // curl http://localhost:8000
+}
+ENDPOINT("GET", "/users/{my-path-variable}", getUserById,
          PATH(Int64, userId, "my-path-variable")) 
-  {
-      OATPP_LOGD("Test", "userId=%d", userId->getValue());
-      return createResponse(Status::CODE_200, 87);
-  }
+{
+    OATPP_LOGD("Test", "userId=%d", userId->getValue());
+    return createResponse(Status::CODE_200, 87);
+    // curl http://localhost:8000/users/7
+}
 
-  ENDPOINT("GET", "/users", getUsers,
+ENDPOINT("GET", "/users", getUsers,
          QUERY(Int32, age, "user-age")) 
 {
   OATPP_LOGD("Test", "age=%d", age->getValue());
   return createResponse(Status::CODE_200, "55");
+  // curl http://localhost:8000/users?user-age=96
 }
 
 ENDPOINT("GET", "/usersInfo", getUsersInfo,
@@ -63,6 +67,7 @@ ENDPOINT("GET", "/usersInfo", getUsersInfo,
   userInfoDto->name = "Yang chao";
   userInfoDto->address = "China";
   return createDtoResponse(Status::CODE_200, userInfoDto);
+  // curl http://localhost:8000/usersInfo?user-id=96
 }
   
   // TODO Insert Your endpoints here !!!
