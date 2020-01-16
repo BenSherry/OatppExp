@@ -21,6 +21,16 @@ private:
 public:
   
   void static runExample(const std::shared_ptr<DemoApiClient>& client) {
+
+    {
+      auto data = client->doGetMainPage()->readBodyToString();
+      OATPP_LOGD(TAG, "[doGetMainPage] data='%s'", data->c_str());
+    }
+
+    {
+      auto data = client->doGetUserId(123)->readBodyToString();
+      OATPP_LOGD(TAG, "[doGetUserId] data='%s'", data->c_str());
+    }
     
     {
       auto data = client->doGetUserAge(46)->readBodyToString();
@@ -29,14 +39,15 @@ public:
 
     {
       auto data = client->doGetUserInfo(27)->readBodyToString();
-      OATPP_LOGD(TAG, "[doGetUserAge] data='%s'", data->c_str());
+      OATPP_LOGD(TAG, "[doGetUserInfo] data='%s'", data->c_str());
       auto payloadJson = nlohmann::json::parse(data->c_str());
+      /*parse json
       std::cout << payloadJson["age"] << "\n";
       std::cout << payloadJson["name"] << "\n";
-      std::cout << payloadJson["address"] << "\n";
+      std::cout << payloadJson["address"] << "\n";*/
     }
 
-    {
+    /*{
       auto data = client->doGet()->readBodyToString();
       OATPP_LOGD(TAG, "[doGet] data='%s'", data->c_str());
     }
@@ -62,7 +73,7 @@ public:
       dto->code = 200;
       auto data = client->doPostWithDto(dto)->readBodyToString();
       OATPP_LOGD(TAG, "[doPostWithDto] data='%s'", data->c_str());
-    }
+    }*/
     
   }
   

@@ -38,7 +38,7 @@ ENDPOINT("GET", "/", root)
 {
     auto dto = MyDto::createShared();
     dto->statusCode = 200;
-    dto->message = "Hello World!";
+    dto->message = "Welcome! Young skywalker";
     return createDtoResponse(Status::CODE_200, dto);
     // curl http://localhost:8000
 }

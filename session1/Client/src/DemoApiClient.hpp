@@ -24,7 +24,8 @@ class DemoApiClient : public oatpp::web::client::ApiClient {
   
   API_CALL_ASYNC("GET", "/", getRootAsync)
   
-  API_CALL("GET", "get", doGet)
+  API_CALL("GET", "/", doGetMainPage)
+  API_CALL("GET", "/users/{userId}", doGetUserId, PATH(Int64, userId))
   API_CALL("GET", "/users", doGetUserAge, QUERY(Int32, age, "user-age"))
   API_CALL("GET", "/usersInfo", doGetUserInfo, QUERY(Int32, Id, "user-id"))
   API_CALL("POST", "post", doPost, BODY_STRING(String, body))
